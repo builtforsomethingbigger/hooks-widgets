@@ -1,3 +1,6 @@
+// THIS ACCORDION COMPONENT LEVERAGES THE {useState} HOOK AND SEMANTIC UI
+// TO GIVE HOVER/DROPDOWN FUNCTIONALITY TO THE ACCORDION STYLE WIDGET
+
 import React, { useState } from 'react'
 import { render } from '@testing-library/react'
 
