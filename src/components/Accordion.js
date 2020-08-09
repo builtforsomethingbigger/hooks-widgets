@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from '@testing-library/react'
 
 const Accordion = ({ items }) => {
 
-    const renderedItems = items.map(item => {
+    const [activeIndex, setActiveIndex] = useState(null)
+
+    const onTitleClick = (index) => {
+        setActiveIndex(index)
+    }
+
+    const renderedItems = items.map((item, index) => {
         return (
             // use React.Fragment to remove the double border placed by Semantic UI
             <React.Fragment key={item.title}>
-                <div className="title active">
+                <div className="title active"
+                    onClick={() => onTitleClick(index)}
+                >
                     <i className="dropdown icon"></i>
                     {item.title}
                 </div>
@@ -21,6 +29,7 @@ const Accordion = ({ items }) => {
     return (
         <div className="ui styled accordion">
             {renderedItems}
+            <h1>{activeIndex}</h1>
         </div>
     )
 }
