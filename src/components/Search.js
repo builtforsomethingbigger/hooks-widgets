@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const Search = () => {
 
-    const [term, setTerm] = useState('programming')
+    const [term, setTerm] = useState('')
     const [results, setResults] = useState([])
 
     useEffect(() => {
@@ -27,8 +27,15 @@ const Search = () => {
             })
             setResults(data.query.search)
         }
-        if (term) {
-            search()
+
+        const timeoutId = setTimeout(() => {
+            if (term) {
+                search()
+            }
+        }, 500)
+
+        return () => {
+            clearTimeout(timeoutId)
         }
     }, [term])
 
@@ -45,26 +52,32 @@ const Search = () => {
         //     })
         //     setResults(data.query.search)
         // })()
-                
+            
 
 
-                const renderedResults = results.map((result) => {
-                    return(
-                        <div key={result.pageid} className="item">
-                            <div className="right floated content">
-                                <a className="ui button" target="_blank" href={`https://en.wikipedia.org?curid=${result.pageid}`}>Go</a>
-                            </div>
-                            <div className="content">
-                                <div className="header">{result.title}</div>
-                                    {/* {result.snippet} will return the data along with HTML tags (ie: <span>, <p>) */}
-                                    {/* To resolve this, we use the "dangerouslySetInnerHTML" property */}
-                                <span dangerouslySetInnerHTML={{__html: result.snippet}}></span>
-                                    {/* BEWARE: using the dagnerouslySetInnerHTML property on JSX can introduce Cross-Site Scripting Attacks */}
-                                    {/* Mitigate your risk - Make sure your HTML source is trustworthy!!! */}
-                            </div>
-                        </div>
-                    )
-                })
+    const renderedResults = results.map((result) => {
+        return(
+            <div key={result.pageid} className="item">
+                <div className="right floated content">
+                    <a className="ui button" 
+                        href={`https://en.wikipedia.org?curid=${result.pageid}`}
+                        target="_blank" >
+                            Go
+                    </a>
+                </div>
+                <div className="content">
+                    <div className="header">{result.title}</div>
+                        {/* {result.snippet} will return the data along with 
+                            HTML tags (ie: <span>, <p>) */}
+                        {/* To resolve this, use the "dangerouslySetInnerHTML" property */}
+                    <span dangerouslySetInnerHTML={{__html: result.snippet}}></span>
+                        {/* BEWARE: using the dagnerouslySetInnerHTML property 
+                            on JSX can introduce Cross-Site Scripting Attacks */}
+                        {/* Mitigate your risk - Make sure your HTML source is trustworthy!!! */}
+                </div>
+            </div>
+        )
+    })
 
     return (
         <div>
