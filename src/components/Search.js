@@ -12,39 +12,55 @@ const Search = () => {
     const [results, setResults] = useState([])
 
     useEffect(() => {
-        //useEffect does not allow for async to be declared in the main argument
-        //in order to work around this, you must use a helper method and call async
-            //within that method:
-                //const search = async() => {
-                    //await axios.get()
-                //}, [term])
-                //search()
+    //useEffect does not allow for async to be declared in the main argument
+    //in order to work around this, you must use a helper method and call async
+        //within that method:
+        const search = async() => {
+            const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+                params: {
+                    action: 'query',
+                    list: 'search',
+                    origin: '*',
+                    format: 'json',
+                    srsearch: term
+                },
+            })
+            setResults(data.query.search)
+        }
+        if (term) {
+            search()
+        }
+    }, [term])
 
-            //or you can simplify it:
-                (async() => {
-                    const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
-                        params: {
-                            action: 'query',
-                            list: 'search',
-                            origin: '*',
-                            format: 'json',
-                            srsearch: term
-                        },
-                    })
-                    setResults(data.query.search)
-                })()
-                }, [term])
+    //or you can simplify it:
+        // (async() => {
+        //     const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
+        //         params: {
+        //             action: 'query',
+        //             list: 'search',
+        //             origin: '*',
+        //             format: 'json',
+        //             srsearch: term
+        //         },
+        //     })
+        //     setResults(data.query.search)
+        // })()
+                
+
 
                 const renderedResults = results.map((result) => {
                     return(
                         <div key={result.pageid} className="item">
+                            <div className="right floated content">
+                                <a className="ui button" target="_blank" href={`https://en.wikipedia.org?curid=${result.pageid}`}>Go</a>
+                            </div>
                             <div className="content">
                                 <div className="header">{result.title}</div>
-                                {/* {result.snippet} will return the data along with HTML tags (ie: <span>, <p>) */}
-                                {/* To resolve this, we use the "dangerouslySetInnerHTML" property */}
+                                    {/* {result.snippet} will return the data along with HTML tags (ie: <span>, <p>) */}
+                                    {/* To resolve this, we use the "dangerouslySetInnerHTML" property */}
                                 <span dangerouslySetInnerHTML={{__html: result.snippet}}></span>
-                                {/* BEWARE: using the dagnerouslySetInnerHTML property on JSX can introduce Cross-Site Scripting Attacks */}
-                                {/* Mitigate your risk - Make sure your HTML source is trustworthy!!! */}
+                                    {/* BEWARE: using the dagnerouslySetInnerHTML property on JSX can introduce Cross-Site Scripting Attacks */}
+                                    {/* Mitigate your risk - Make sure your HTML source is trustworthy!!! */}
                             </div>
                         </div>
                     )
