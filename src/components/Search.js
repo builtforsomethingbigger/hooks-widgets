@@ -28,14 +28,17 @@ const Search = () => {
             setResults(data.query.search)
         }
 
-        const timeoutId = setTimeout(() => {
-            if (term) {
-                search()
+        if (term && !results.length){
+            search()
+        } else {
+            const timeoutId = setTimeout(() => {
+                if (term) {
+                    search()
+                }
+            }, 800)
+            return() => {
+                clearTimeout(timeoutId)
             }
-        }, 500)
-
-        return () => {
-            clearTimeout(timeoutId)
         }
     }, [term])
 
@@ -52,8 +55,7 @@ const Search = () => {
         //     })
         //     setResults(data.query.search)
         // })()
-            
-
+        
 
     const renderedResults = results.map((result) => {
         return(
@@ -64,7 +66,7 @@ const Search = () => {
                         target="_blank" >
                             Go
                     </a>
-                </div>
+                </div>  
                 <div className="content">
                     <div className="header">{result.title}</div>
                         {/* {result.snippet} will return the data along with 
@@ -78,6 +80,14 @@ const Search = () => {
             </div>
         )
     })
+    
+    const noSearchText = () => {
+        if(!term.length){
+            return (
+                <p className="header">WHAT WOULD YOU LIKE TO SEARCH?</p>
+            )
+        }
+    }
 
     return (
         <div>
@@ -90,6 +100,7 @@ const Search = () => {
                     />
                 </div>
             </div>
+            {noSearchText()}
             <div className="ui celled list">{renderedResults}</div>
         </div>
     )
