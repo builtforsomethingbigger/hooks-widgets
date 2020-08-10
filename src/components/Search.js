@@ -40,7 +40,11 @@ const Search = () => {
                         <div key={result.pageid} className="item">
                             <div className="content">
                                 <div className="header">{result.title}</div>
-                                {result.snippet}
+                                {/* {result.snippet} will return the data along with HTML tags (ie: <span>, <p>) */}
+                                {/* To resolve this, we use the "dangerouslySetInnerHTML" property */}
+                                <span dangerouslySetInnerHTML={{__html: result.snippet}}></span>
+                                {/* BEWARE: using the dagnerouslySetInnerHTML property on JSX can introduce Cross-Site Scripting Attacks */}
+                                {/* Mitigate your risk - Make sure your HTML source is trustworthy!!! */}
                             </div>
                         </div>
                     )
