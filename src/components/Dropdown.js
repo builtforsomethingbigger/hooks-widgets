@@ -3,6 +3,12 @@ import React from 'react'
 const Dropdown = ({ options, selected, onSelectedChange }) => {
 
     const renderedOptions = options.map((option) => {
+
+        //if the color is selected, remove it as an option. only show the unselected options.
+        if (option.value === selected.value){
+            return null
+        }
+
         return (
             <div className="item" key={option.value} onClick={() => onSelectedChange(option)}>
                 {option.label}
