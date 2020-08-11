@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Dropdown = ({ options, selected, onSelectedChange }) => {
 
+    const [open, setOpen] = useState(false)
+    
     const renderedOptions = options.map((option) => {
 
         //if the color is selected, remove it as an option. only show the unselected options.
@@ -20,10 +22,13 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
         <div className="ui form">
             <div className="field">
                 <label className="label">SELECT A COLOR</label>
-                <div className="ui selection dropdown visible active">
+                <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} 
+                    /*onClick setOpen with the argument of whatever is the opposite state value of open*/
+                    onClick={() => setOpen(!open)} 
+                >
                     <i className="dropdown icon"></i>
                     <div className="text">{selected.label}</div>
-                    <div className="menu visible transition">
+                    <div className={`menu visible ${open ? 'transition' : ''}`}>
                         {renderedOptions}
                     </div>
                 </div>
