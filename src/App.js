@@ -37,8 +37,8 @@ const options = [
 
 export default () => {
 
-    const [selected, setSelected] = useState(options[0])
-    const [showDropdown, setShowDropdown] = useState(true)
+    // const [selected, setSelected] = useState(options[0])
+    // const [showDropdown, setShowDropdown] = useState(true)
     
     return(
         <div>
@@ -52,7 +52,10 @@ export default () => {
                     onSelectedChange={setSelected}
                 />
                 : null
-            } */}
+            }
+            <div className="ui card" style={{backgroundColor: selected.label}}>
+                <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
+            </div> */}
             <Translate/>
         </div>
     )

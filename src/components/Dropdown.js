@@ -50,9 +50,6 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
                     </div>
                 </div>
             </div>
-            <div className="ui card" style={{backgroundColor: selected.label}}>
-                <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
-            </div>
         </div>
     )
 }
