@@ -5,9 +5,9 @@ const Header = () => {
     return(
         <div className="ui secondary pointing menu">
             <Link href="/" className="item">
-                ACCORDION
+                INFO MENU
             </Link>
-            <Link href="/list" className="item">
+            <Link href="/search" className="item">
                 SEARCH
             </Link> 
             <Link href="/dropdown" className="item">

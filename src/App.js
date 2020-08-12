@@ -9,16 +9,28 @@ import Translate from './components/Translate'
 
 const items = [
     {
-        title: 'What is React?',
-        content: 'React is a frontend JavaScript framework'
+        title: 'What is the purpose of this widget application?',
+        content: 'To demonstrate practical application of React 16 Hooks and custom routing architecture.'
     },
     {
-        title: 'Why use React?',
-        content: 'React is a favorite JS library among engineers'
+        title: 'Navigation Menu Overview',
+        content: "The Nav menu is built without using the standard React Router. It leverages Route and Link components that connect each component with their associated URL based on the 'children' props that are passed up to the parent JSX component."
     },
     {
-        title: 'How do you use React?',
-        content: 'You use React by creating components'
+        title: 'Info Menu Widget Overview',
+        content: "This overview menu leverages Semantic UI's 'Accordion' class along with the {useState} hook to display each selected menu dropdown."
+    },
+    {
+        title: 'Search Widget Overview',
+        content: "The Search widget leverages the {useState} and {useEffect} hooks applied to the event listener functions. It also integrates the Wikipedia API and a controlled form to dynamically pull in data associated with the entered search term after the user key strokes have paused for a short amount of time to reduce the amount of requests that are being made."
+    },
+    {
+        title: 'Dropdown Widget Overview',
+        content: "The Dropdown widget is a reusable component that leverages the {useState}, {useEffect}, and {useRef} hooks. As a standalone component, it's being used to display a simple color picker. However, it is also repurposed as a language selector in the Translate widget."
+    },
+    {
+        title: 'Translate Widget Overview',
+        content: "The Translate widget leverages the {useState} hook along with the Dropdown component. It makes API requests to the Google Translate API (only accessible from localhost:3000)."
     }
 ]
 
@@ -48,7 +60,7 @@ export default () => {
             <Route path='/'>
                 <Accordion items={items} />
             </Route>
-            <Route path='/list'>
+            <Route path='/search'>
                 <Search />
             </Route>
             <Route path='/dropdown'>
@@ -60,21 +72,8 @@ export default () => {
                 />
             </Route>
             <Route path='/translate'>
-            <Translate/>
-            </Route>            
-            
-            {/* <button className="ui button" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
-            {showDropdown ? 
-                <Dropdown 
-                    options={options}
-                    selected={selected}
-                    onSelectedChange={setSelected}
-                />
-                : null
-            }
-            <div className="ui card" style={{backgroundColor: selected.label}}>
-                <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
-            </div> */}
+                <Translate/>
+            </Route>                        
         </div>
     )
 }
