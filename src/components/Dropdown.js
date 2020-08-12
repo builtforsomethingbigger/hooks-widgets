@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from 'react'
 const Dropdown = ({ label, options, selected, onSelectedChange }) => {
 
     const [open, setOpen] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(true)
     const ref = useRef()
 
     useEffect(() => {
@@ -37,6 +38,8 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     
     return(
         <div className="ui form" ref={ref}>
+            <button className="ui button" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
+            {showDropdown ? 
             <div className="field">
                 <label className="label">{label}</label>
                 <div className={`ui selection dropdown ${open ? 'visible active' : ''}`} 
@@ -50,7 +53,12 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
                     </div>
                 </div>
             </div>
+            : null}
+            <div className="ui card" style={{backgroundColor: selected.label}}>
+                <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
+            </div>
         </div>
     )
 }
 export default Dropdown
+
