@@ -35,6 +35,16 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
             </div>
         )
     })
+
+    const showUiCard = () => {
+        if (window.location.pathname === '/dropdown'){
+            return(
+                <div className="ui card" style={{backgroundColor: selected.label}}>
+                    <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
+                </div>
+            )
+        }
+    }
     
     return(
         <div className="ui form" ref={ref}>
@@ -54,9 +64,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
                 </div>
             </div>
             : null}
-            <div className="ui card" style={{backgroundColor: selected.label}}>
-                <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
-            </div>
+            {showUiCard()}
         </div>
     )
 }
