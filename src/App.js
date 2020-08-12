@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import Route from './components/Route'
+import Header from './components/Header'
 import Accordion from './components/Accordion'
 import Search from './components/Search'
 import Dropdown from './components/Dropdown'
@@ -35,15 +37,33 @@ const options = [
     }
 ]
 
+
 export default () => {
 
-    // const [selected, setSelected] = useState(options[0])
+    const [selected, setSelected] = useState(options[0])
     // const [showDropdown, setShowDropdown] = useState(true)
     
     return(
         <div>
-            {/* <Accordion items={items} /> */}
-            {/* <Search /> */}
+            <Header />
+            <Route path='/'>
+                <Accordion items={items} />
+            </Route>
+            <Route path='/list'>
+                <Search />
+            </Route>
+            <Route path='/dropdown'>
+                <Dropdown 
+                    label="SELECT A COLOR"
+                    options={options}
+                    selected={selected}
+                    onSelectedChange={setSelected}
+                />
+            </Route>
+            <Route path='/translate'>
+            <Translate/>
+            </Route>            
+            
             {/* <button className="ui button" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
             {showDropdown ? 
                 <Dropdown 
@@ -56,7 +76,6 @@ export default () => {
             <div className="ui card" style={{backgroundColor: selected.label}}>
                 <p style={{color: 'white', padding: 10, textAlign: 'center'}}>You chose {selected.label} as your color.</p>
             </div> */}
-            <Translate/>
         </div>
     )
 }
