@@ -5,6 +5,7 @@ import Accordion from './components/Accordion'
 import Search from './components/Search'
 import Dropdown from './components/Dropdown'
 import Translate from './components/Translate'
+import './styles/styles.css'
 
 
 const items = [
@@ -55,7 +56,7 @@ export default () => {
     const [selected, setSelected] = useState(options[0])
     
     return(
-        <div>
+        <div id="App">
             <Header />
             <Route path='/'>
                 <Accordion items={items} />

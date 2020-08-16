@@ -47,7 +47,7 @@ const Dropdown = ({ label, options, selected, onSelectedChange }) => {
     }
     
     return(
-        <div className="ui form" ref={ref}>
+        <div id="Main" className="ui form" ref={ref}>
             <button className="ui button" onClick={() => setShowDropdown(!showDropdown)}>Toggle Dropdown</button>
             {showDropdown ? 
             <div className="field">
