@@ -11,7 +11,9 @@
     margin: 10px 10px 20px 10px;
 }
 .onHover:hover{
-    color: blue !important;
     text-decoration: underline !important;
     transform: scale(1.05);
+}
+.blue:hover{
+    color: blue !important;
 }

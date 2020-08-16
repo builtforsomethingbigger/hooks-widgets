@@ -19,7 +19,7 @@ const Accordion = ({ items }) => {
         return (
             // use React.Fragment to remove the double border placed by Semantic UI
             <React.Fragment key={item.title}>
-                <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
+                <div className={`title ${active} blue`} onClick={() => onTitleClick(index)}>
                     <i className="dropdown icon"></i>
                     {item.title}
                 </div>
